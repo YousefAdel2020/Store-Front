@@ -35,7 +35,12 @@ it is API for E-commerce store
 * open the terminal
 * write **`npm i`** in terminal to install all dependancies
 * create .env file and put the enviroment variables in it
-* create database for development and testing
+#### For database creation
+* open terminal
+* write down in the terminal 'psql -U (username)' and then enter the password
+* write 'CREATE DATABASE front_store;' to create the development database
+* write 'CREATE DATABASE front_store_test;' to create the testing database
+
 
 ## Available Scripts
 
