@@ -8,14 +8,24 @@ const store=new orderStore();
 
 
 const index=async(_req: Request, res: Response)=>{
-    const orders=await store.index();
-    res.status(200).json(orders);
+    try {
+        const orders=await store.index();
+         res.status(200).json(orders);
+    } catch (error) {
+        res.json(error)
+    }
+    
 }
 
 
 const show=async(req: Request, res: Response)=>{
-    const order=await store.show(parseInt(req.params.id));
-    res.status(200).json(order);
+    try {
+        const order=await store.show(parseInt(req.params.id));
+        res.status(200).json(order);
+    } catch (error) {
+        res.json(error)
+    }
+  
 }
 
 const create=async(req: Request, res: Response)=>{
@@ -59,8 +69,8 @@ const current_order=async(req:Request,res:Response)=>{
 
 
 const orderRoutes = (app: express.Application) => {
-    app.get('/orders', index)
-    app.get('/orders/:id', show)
+    app.get('/orders', verifyAuthToken,index)
+    app.get('/orders/:id',verifyAuthToken, show)
     app.post('/orders',verifyAuthToken, create)
     app.post('/orders/:id/products', verifyAuthToken,addProduct)
     app.get('/orders/users/:id',verifyAuthToken,current_order)

@@ -15,13 +15,24 @@ const info = new userInfo();
 
 
 const index = async (_req: Request, res: Response) => {
+  try { 
     const users = await info.index()
     res.status(200).json(users)
+    
+  } catch (error) {
+    res.json(error)
+  }
+  
 }
 
 const show = async (_req: Request, res: Response) => {
+  try {
     const user = await info.show(parseInt(_req.params.id as string))
     res.status(200).json(user)
+  } catch (error) {
+    res.json(error)
+  }
+  
 }
 
 
